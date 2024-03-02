@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .result-box {
+            background-color: lightblue;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .input-label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .input-field {
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .calculate-button {
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 20px 30px; /* Increased padding */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .calculate-button:hover {
+            background-color: #0056b3;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: bold; /* Set result text to bold */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Percent Strength Calculator</h1>
+        <form id="calculator-form">
+            <label for="weight-input" class="input-label">Weight of Solute (in grams):</label>
+            <input type="text" id="weight-input" class="input-field" required><br><br>
+
+            <label for="volume-input" class="input-label">Volume of Solvent (in mL):</label>
+            <input type="text" id="volume-input" class="input-field" required><br><br>
+
+            <button type="submit" class="calculate-button">Calculate</button>
+        </form>
+        <div id="result-container"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('calculator-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                var weight = parseFloat(document.getElementById('weight-input').value);
+                var volume = parseFloat(document.getElementById('volume-input').value);
+
+                var percentWV = (weight / volume) * 100;
+
+                var resultContainer = document.getElementById('result-container');
+                resultContainer.innerHTML = `
+                    <div class="result-box">
+                        <p class="input-label">Percent Weight in Volume (w/v):</p>
+                        <p class="result-value">${percentWV.toFixed(2)}%</p>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
